@@ -1,0 +1,40 @@
+services:
+  nginx:
+    build: './nginx'
+    container_name: nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    init: true
+    volumes:
+      - 'wordpress:/var/www/html'
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+    depends_on:
+      wordpress:
+        condition: service_started
+    restart: always
+
+  wordpress:
+    build: './wordpress'
+    container_name: wordpress
+    init: true
+    volumes:
+      - 'wordpress:/var/www/html'
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME}
+      SITE_TITLE: ${SITE_TITLE}
+      ADMIN_NAME: ${ADMIN_NAME}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      USER_NAME: ${USER_NAME}
+      USER_PASSWORD: ${USER_PASSWORD}
+      USER_EMAIL: ${USER_EMAIL}
+      DB_PRIVATE_IP: ${DB_PRIVATE_IP}
+    restart: always
+
+volumes:
+  wordpress:
