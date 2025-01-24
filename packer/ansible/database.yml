@@ -1,0 +1,22 @@
+- hosts: all
+  gather_facts: false
+  become: true
+  roles:
+    - role: setting_docker
+  tasks:
+    - name: copy_requirements
+      copy:
+        src: "./_requirements/"
+        dest: "/home/{{ ansible_user }}/app/"
+        mode: '0755'
+        directory_mode: '0755'
+
+    - name: execute docker compose
+      shell:
+        cmd: docker-compose up -d
+        chdir: "/home/{{ ansible_user }}/app/"
+      environment:
+        MYSQL_USER: "{{ lookup('env', 'MYSQL_USER') }}"
+        MYSQL_PASSWORD: "{{ lookup('env', 'MYSQL_PASSWORD') }}"
+        DATABASE_NAME: "{{ lookup('env', 'DATABASE_NAME') }}"
+        MYSQL_ROOT_PASSWORD: "{{ lookup('env', 'MYSQL_ROOT_PASSWORD') }}"
