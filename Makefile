@@ -6,7 +6,7 @@ export
 
 .PHONY: provision deploy all destroy re build_ami
 
-all: build_ami provision deploy
+all: provision deploy
 
 build_ami: packer
 	packer init $(PACKER_PATH)/database.pkr.hcl

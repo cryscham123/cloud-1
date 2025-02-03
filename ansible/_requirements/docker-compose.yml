@@ -43,6 +43,7 @@ services:
     environment:
       PMA_HOST: ${DB_PRIVATE_IP}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      PMA_ABSOLUTE_URI: https://${DOMAIN_NAME}/phpmyadmin/
 
 volumes:
   wordpress:
