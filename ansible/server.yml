@@ -23,6 +23,7 @@
         DOMAIN_NAME: "{{ ansible_host }}"
         MYSQL_USER: "{{ lookup('env', 'MYSQL_USER') }}"
         MYSQL_PASSWORD: "{{ lookup('env', 'MYSQL_PASSWORD') }}"
+        MYSQL_ROOT_PASSWORD: "{{ lookup('env', 'MYSQL_ROOT_PASSWORD') }}"
         DATABASE_NAME: "{{ lookup('env', 'DATABASE_NAME') }}"
         SITE_TITLE: "{{ lookup('env', 'SITE_TITLE') }}"
         ADMIN_NAME: "{{ lookup('env', 'ADMIN_NAME') }}"

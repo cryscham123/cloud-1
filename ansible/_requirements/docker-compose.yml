@@ -36,5 +36,15 @@ services:
       DB_PRIVATE_IP: ${DB_PRIVATE_IP}
     restart: always
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: ${DB_PRIVATE_IP}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "8080:8080"
+
 volumes:
   wordpress:
